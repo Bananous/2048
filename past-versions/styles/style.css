@@ -1,0 +1,109 @@
+.container {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.grid-container {
+    position: relative;
+    background-color: burlywood;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
+    aspect-ratio: 1/1;
+    padding: 10px;
+    border-radius: 6px;
+    z-index: 1;
+}
+
+.grid-item{
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    font-size: 30px;
+    text-align: center;
+    z-index: 2;
+}
+
+.tile-container{
+    position: absolute;
+    transform: translate(10px, 10px);
+    position: absolute;
+    z-index: 5;
+}
+
+.tile{
+    position: absolute;
+    background-color: orange;
+    color: #f9f6f2;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 55px;
+    width: 109px;
+    height: 109px;
+    border-radius: 3px;
+    z-index: 3;
+    line-height: 109px;
+    animation-duration: 200ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    transform: translate(100px, 100px);
+}
+
+/* 
+0   1   2   3
+4   5   6   7  
+8   9   10  11
+12  13  14  15
+*/
+
+@keyframes pos0 {100% {transform: translate(0px, 0px);}}
+@keyframes pos1 {100% {transform: translate(123.75px, 0px);}}
+@keyframes pos2 {100% {transform: translate(247.5px, 0px);}}
+@keyframes pos3 {100% {transform: translate(371.25px, 0px);}}
+
+@keyframes pos4 {100% {transform: translate(0px, 123.75px);}}
+@keyframes pos5 {100% {transform: translate(123.75px, 123.75px);}}
+@keyframes pos6 {100% {transform: translate(247.5px, 123.75px);}}
+@keyframes pos7 {100% {transform: translate(371.25px, 123.75px);}}
+
+@keyframes pos8 {100% {transform: translate(0px, 247.5px);}}
+@keyframes pos9 {100% {transform: translate(123.75px, 247.5px);}}
+@keyframes pos10 {100% {transform: translate(247.5px, 247.5px);}}
+@keyframes pos11 {100% {transform: translate(371.25px, 247.5px);}}
+
+@keyframes pos12 {100% {transform: translate(0px, 371.25px);}}
+@keyframes pos13 {100% {transform: translate(123.75px, 371.25px);}}
+@keyframes pos14 {100% {transform: translate(247.5px, 371.25px);}}
+@keyframes pos15 {100% {transform: translate(371.25px, 371.25px);}}
+
+@keyframes appear {
+    0%{
+        opacity: 0;
+        transform: scale(0);
+
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 
+for some reasons transform fuck up the transform: translate
+
+*/
+
+
+@keyframes pop {
+    0%{
+        transform: scale(0);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
