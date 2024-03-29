@@ -71,22 +71,22 @@
 
 @keyframes pos0 {100% {transform: translate(0px, 0px);}}
 @keyframes pos1 {100% {transform: translate(123.75px, 0px);}}
-@keyframes pos2 {100% {transform: translate(247.5px, 0px);}}
+@keyframes pos2 {100% {transform: translate(247px, 0px);}}
 @keyframes pos3 {100% {transform: translate(371.25px, 0px);}}
 
 @keyframes pos4 {100% {transform: translate(0px, 123.75px);}}
 @keyframes pos5 {100% {transform: translate(123.75px, 123.75px);}}
-@keyframes pos6 {100% {transform: translate(247.5px, 123.75px);}}
+@keyframes pos6 {100% {transform: translate(247px, 123.75px);}}
 @keyframes pos7 {100% {transform: translate(371.25px, 123.75px);}}
 
-@keyframes pos8 {100% {transform: translate(0px, 247.5px);}}
-@keyframes pos9 {100% {transform: translate(123.75px, 247.5px);}}
-@keyframes pos10 {100% {transform: translate(247.5px, 247.5px);}}
-@keyframes pos11 {100% {transform: translate(371.25px, 247.5px);}}
+@keyframes pos8 {100% {transform: translate(0px, 247px);}}
+@keyframes pos9 {100% {transform: translate(123.75px, 247px);}}
+@keyframes pos10 {100% {transform: translate(247px, 247px);}}
+@keyframes pos11 {100% {transform: translate(371.25px, 247px);}}
 
 @keyframes pos12 {100% {transform: translate(0px, 371.25px);}}
 @keyframes pos13 {100% {transform: translate(123.75px, 371.25px);}}
-@keyframes pos14 {100% {transform: translate(247.5px, 371.25px);}}
+@keyframes pos14 {100% {transform: translate(247px, 371.25px);}}
 @keyframes pos15 {100% {transform: translate(371.25px, 371.25px);}}
 
 @keyframes appear {

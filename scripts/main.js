@@ -21,7 +21,7 @@ function createTile(x, y, value, animation){
     if(animation == "nope") console.log("banana");
     else if(animation[2] === "s") newTile.style.animationName = animation;
     else newInnertile.style.animationName = animation;
-    return newInnertile;
+    return newTile;
 }
 
 let board = [[0, 0, 0, 0],
@@ -33,7 +33,7 @@ function createNew(x, y, value, animation){
     return createTile(arr[y], arr[x], value, animation);
 }
 
-let arr = [0, 123.75, 247.5, 371.25];
+let arr = [0, 123.75, 247, 371.25];
 let x1;
 let y1;
 let x2;
@@ -58,6 +58,20 @@ createNew(x1, y1, start1, "appear");
 createNew(x2, y2, start2, "appear");
 
 console.log(board);
+
+function genrand(){
+    let empty = [];
+    for(let i = 0; i < 4; i++){
+        for(let j = 0; j < 4; j++){
+            if(board[i][j] == 0) empty.push([i, j]);
+        }
+    }
+    let square = Math.floor(Math.random() * empty.length);
+    let tf = Math.floor(Math.random() * 2);
+    tf = 4-tf*2;
+    board[empty[square][0]][empty[square][1]] = tf;
+    createNew(empty[square][0], empty[square][1], tf, "appear");
+}
 
 function move(){
     let currentTiles = document.querySelectorAll(".tile");
@@ -117,8 +131,8 @@ function moveRight(){
     board = board.map(row => row.reverse());
     let temp = move();
     for(let i = 0; i < temp.length; i++){
-        temp[i][0].ybegin = 4-temp[i][0].ybegin;
-        temp[i][0].yend = 4-temp[i][0].yend;
+        temp[i][0].ybegin = 3-temp[i][0].ybegin;
+        temp[i][0].yend = 3-temp[i][0].yend;
     }
     board = board.map(row => row.reverse());
     return temp;
@@ -131,22 +145,54 @@ function transpose(matrix) {
 function moveUp(){
     board = transpose(board);
     let temp = move();
+    for(let i = 0; i < temp.length; i++){
+        let swap = temp[i][0].ybegin;
+        temp[i][0].ybegin = temp[i][0].xbegin;
+        temp[i][0].xbegin = swap;
+        swap = temp[i][0].yend;
+        temp[i][0].yend = temp[i][0].xend;
+        temp[i][0].xend = swap;
+    }
     board = transpose(board);
     return temp;
 }
 
 function moveDown(){
     board = transpose(board);
-    let temp = move();
+    let temp = moveRight();
+    for(let i = 0; i < temp.length; i++){
+        let swap = temp[i][0].ybegin;
+        temp[i][0].ybegin = temp[i][0].xbegin;
+        temp[i][0].xbegin = swap;
+        swap = temp[i][0].yend;
+        temp[i][0].yend = temp[i][0].xend;
+        temp[i][0].xend = swap;
+    }
     board = transpose(board);
     return temp;
 }
 
 document.addEventListener("keydown",  (event) => {
-    if(event.key == "ArrowLeft"){
-
+    let process=[];
+    switch(event.key){
+        case "ArrowLeft":
+        case "a":
+            process = moveLeft();
+            break;
+        case "ArrowRight":
+        case "d":
+            process = moveRight();
+            break;
+        case "ArrowUp":
+        case "w":
+            process = moveUp();
+            break;
+        case "ArrowDown":
+        case "s":
+            process = moveDown();
+            break;
     }
-    let process = moveLeft();
+    
     let moved = [];
     let stay = [];
     let merged = [];
@@ -161,14 +207,20 @@ document.addEventListener("keydown",  (event) => {
     for(let i = 0; i < stay.length; i++){
         createNew(stay[i].xbegin, stay[i].ybegin, stay[i].num, "nope");
     }
+    let last;
     for(let i = 0; i < moved.length; i++){
         let position = 4 * moved[i].xend + moved[i].yend;
-        createNew(moved[i].xbegin, moved[i].ybegin, moved[i].num, `pos${position}`);
+        last = createNew(moved[i].xbegin, moved[i].ybegin, moved[i].num, `pos${position}`);
     }
-    for(let i = 0; i < merged.length; i++){
-        let twice = merged[i].num * 2;
-        createNew(merged[i].xend, merged[i].yend, twice, "pop");
-    }
+    // let last = document.querySelector(".tile");
+    last.addEventListener("animationend", () => {
+        for(let i = 0; i < merged.length; i++){
+            let twice = merged[i].num * 2;
+            createNew(merged[i].xend, merged[i].yend, twice, "pop");
+        }
+        genrand();
+    })
+    
     console.log(board);
 })
 
